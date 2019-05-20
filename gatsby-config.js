@@ -13,6 +13,21 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        baseUrl: 'wp.kenyeres.ca',
+        protocol: 'https',
+        hostingWPCOM: false,
+        useACF: false,
+        includedRoutes: [
+          "/*/*/posts",
+          "/*/*/pages",
+          "/*/*/talks",
+          "/*/*/oss",
+        ]
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
