@@ -25,7 +25,11 @@ module.exports = {
           "/*/*/pages",
           "/*/*/talks",
           "/*/*/oss",
-        ]
+        ],
+        searchAndReplaceContentUrls: {
+          sourceUrl: "https://wp.kenyeres.ca",
+          replacementUrl: process.env.NODE_ENV === 'development' ? "http://localhost:8000" : "https://www.kenyeres.ca",
+        },
       },
     },
     `gatsby-transformer-sharp`,
