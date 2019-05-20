@@ -25,6 +25,20 @@ const fetchPages = graphql => graphql(`
   }
 `).then(({ data: { allWordpressPage: { nodes } } }) => nodes)
 
+const fetchPosts = graphql => graphql(`
+  query {
+    allWordpressPost(filter: { status: { eq: "publish" } }) {
+      nodes {
+        content
+        slug
+        title
+        type
+        path
+      }
+    }
+  }
+`).then(({ data: { allWordpressPost: { nodes } } }) => nodes)
+
 const fetchTalks = graphql => graphql(`
   query {
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
@@ -41,5 +55,6 @@ const fetchTalks = graphql => graphql(`
 module.exports = {
   fetchOss,
   fetchPages,
+  fetchPosts,
   fetchTalks
 }
