@@ -4,6 +4,7 @@ const {
   removeUnlinkedPosts 
 } = require('./utils')
 
+// Fetch all posts of the `oss` type.
 const fetchAllOss = graphql => graphql(`
   query {
     allWordpressWpOss(filter: {status: { eq: "publish" } }) {
@@ -18,6 +19,7 @@ const fetchAllOss = graphql => graphql(`
   }
 `).then(({ data: { allWordpressWpOss: { nodes } } }) => nodes)
 
+// Fetch all pages.
 const fetchAllPages = graphql => graphql(`
   query {
     allWordpressPage(filter: {status: { eq: "publish" } }) {
@@ -38,6 +40,7 @@ const fetchAllPages = graphql => graphql(`
   }
 `).then(({ data: { allWordpressPage: { nodes } } }) => nodes)
 
+// Fetch all posts.
 const fetchAllPosts = graphql => graphql(`
   query {
     allWordpressPost(filter: { status: { eq: "publish" } }) {
@@ -53,6 +56,7 @@ const fetchAllPosts = graphql => graphql(`
   }
 `).then(({ data: { allWordpressPost: { nodes } } }) => nodes)
 
+// Fetch all posts of the `talks` type.
 const fetchAllTalks = graphql => graphql(`
   query {
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
@@ -74,6 +78,11 @@ const postTypesApi = {
   fetchAllTalks,
 }
 
+/**
+ * Fetch all posts of all types.
+ * @param  {function} graphql
+ * @return {Array}
+ */
 exports.fetchAllPosts = graphql =>
   Promise
     .all(Object.keys(postTypesApi).map(method => postTypesApi[method](graphql)))

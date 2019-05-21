@@ -14,6 +14,12 @@ const getPageTemplate = (type = defaultType) => {
   return cache[type]
 }
 
+/**
+ * Iterate over an array of posts and create
+ * a page for each one.
+ * @param {function} createPage
+ * @param {Array}    posts
+ */
 module.exports = (createPage, posts) =>
   posts.forEach(post => createPage({
     path: post.path,
