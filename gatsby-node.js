@@ -9,6 +9,7 @@ const TYPES = {
   TALK: 'talks',
 }
 const DEFAULT_TYPE = TYPES.PAGE
+const ARCHIVES = [TYPES.PAGE, TYPES.POST]
 const getPageTemplate = (type = DEFAULT_TYPE) => `src/templates/${type}Template.js`
 const getRelatedPosts = ({ acf: { posts } } = { acf: { posts: [] } }) => 
   posts.map(({ wordpress_id: id }) => id)
@@ -16,7 +17,10 @@ const getRelatedPosts = ({ acf: { posts } } = { acf: { posts: [] } }) =>
 const buildRelatedPosts = posts => posts.map(post => {
   if (post.type === TYPES.PAGE) {
     const relatedPosts = getRelatedPosts(post)
-    post.acf.posts = posts.filter(({ wordpress_id: id }) => relatedPosts.includes(id))
+    post.acf.posts = posts.filter(({ wordpress_id: id }) => relatedPosts.includes(id)).map(p => ({
+      ...p,
+      path: ARCHIVES.includes(p.type) ? p.path : undefined,
+    }))
   }
   return post
 })
@@ -30,8 +34,8 @@ exports.createPages = ({ graphql, actions: { createPage } }) =>
         ...posts,
       ]), []),
     ]), []))
-    .then(posts => posts.filter(({ path }) => !!path))
     .then(posts => buildRelatedPosts(posts))
+    .then(posts => posts.filter(({ path, type }) => !!path && ARCHIVES.includes(type)))
     .then(posts => posts.forEach(post => createPage({
       path: post.path,
       component: path.resolve(getPageTemplate(post.type)),

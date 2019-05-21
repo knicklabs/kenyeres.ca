@@ -10,7 +10,9 @@ export default ({ pageContext: { post } } = { post: {} }) => (
     <h1>{post.title}</h1>
     <div dangerouslySetInnerHTML={{__html: post.content}} />
     {post.acf.posts.map(p => (
-      <div><Link to={p.path}>{p.title}</Link></div>
+      <div>
+        {p.path ? <Link to={p.path}>{p.title}</Link> : p.title}
+      </div>
     ))}
   </div>
 )
