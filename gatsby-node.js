@@ -10,9 +10,29 @@ const TYPES = {
 }
 const DEFAULT_TYPE = TYPES.PAGE
 const ARCHIVES = [TYPES.PAGE, TYPES.POST]
-const getPageTemplate = (type = DEFAULT_TYPE) => `src/templates/${type}Template.js`
+
+const cachedTemplates = {}
+const getPageTemplate = (type = DEFAULT_TYPE) => {
+  if (cachedTemplates[type]) {
+    return cachedTemplates[type]
+  }
+  cachedTemplates[type] = path.resolve(`src/templates/${type}Template.js`)
+  return cachedTemplates[type]
+}
+
 const getRelatedPosts = ({ acf: { posts } } = { acf: { posts: [] } }) => 
   posts.map(({ wordpress_id: id }) => id)
+
+const getAllPosts = graphql => 
+  Promise.all(Object.keys(api).map(method => api[method](graphql)))
+
+const flattenPosts = (...postSets) => postSets.reduce((accumulator, postSet) => ([
+  ...accumulator,
+  ...postSet.reduce((accumulator, posts) => ([
+    ...accumulator,
+    ...posts,
+  ]), []),
+]), [])
 
 const buildRelatedPosts = posts => posts.map(post => {
   if (post.type === TYPES.PAGE) {
@@ -25,21 +45,21 @@ const buildRelatedPosts = posts => posts.map(post => {
   return post
 })
 
-exports.createPages = ({ graphql, actions: { createPage } }) => 
-  Promise.all(Object.keys(api).map(method => api[method](graphql)))
-    .then((...postSets) => postSets.reduce((accumulator, postSet) => ([
-      ...accumulator,
-      ...postSet.reduce((accumulator, posts) => ([
-        ...accumulator,
-        ...posts,
-      ]), []),
-    ]), []))
-    .then(posts => buildRelatedPosts(posts))
-    .then(posts => posts.filter(({ path, type }) => !!path && ARCHIVES.includes(type)))
-    .then(posts => posts.forEach(post => createPage({
-      path: post.path,
-      component: path.resolve(getPageTemplate(post.type)),
-      context: {
-        post,
-      }
-    })))
+const removeUnlinkedPosts = posts => 
+  posts.filter(({ path, type }) => !!path && ARCHIVES.includes(type))
+
+const createPagesForPosts = (createPage, posts) =>
+  posts.forEach(post => createPage({
+    path: post.path,
+    component: getPageTemplate(post.type),
+    context: {
+      post,
+    },
+  }))
+
+exports.createPages = ({ graphql, actions: { createPage } }) =>
+  getAllPosts(graphql)
+    .then(flattenPosts)
+    .then(buildRelatedPosts)
+    .then(removeUnlinkedPosts)
+    .then(createPagesForPosts.bind(this, createPage))
