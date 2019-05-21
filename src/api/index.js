@@ -6,6 +6,7 @@ const fetchOss = graphql => graphql(`
         slug
         title
         type
+        wordpress_id
       }
     }
   }
@@ -15,11 +16,17 @@ const fetchPages = graphql => graphql(`
   query {
     allWordpressPage(filter: {status: { eq: "publish" } }) {
       nodes {
+        acf {
+          posts {
+            wordpress_id
+          }
+        }
         content
         path
         slug
         type
         title
+        wordpress_id
       }
     }
   }
@@ -30,10 +37,11 @@ const fetchPosts = graphql => graphql(`
     allWordpressPost(filter: { status: { eq: "publish" } }) {
       nodes {
         content
+        path
         slug
         title
         type
-        path
+        wordpress_id
       }
     }
   }
@@ -47,6 +55,7 @@ const fetchTalks = graphql => graphql(`
         slug
         title
         type
+        wordpress_id
       }
     }
   }
