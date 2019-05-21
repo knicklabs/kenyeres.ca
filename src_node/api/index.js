@@ -1,4 +1,10 @@
-const fetchOss = graphql => graphql(`
+const { 
+  buildRelatedPosts, 
+  flattenPosts, 
+  removeUnlinkedPosts 
+} = require('./utils')
+
+const fetchAllOss = graphql => graphql(`
   query {
     allWordpressWpOss(filter: {status: { eq: "publish" } }) {
       nodes {
@@ -12,7 +18,7 @@ const fetchOss = graphql => graphql(`
   }
 `).then(({ data: { allWordpressWpOss: { nodes } } }) => nodes)
 
-const fetchPages = graphql => graphql(`
+const fetchAllPages = graphql => graphql(`
   query {
     allWordpressPage(filter: {status: { eq: "publish" } }) {
       nodes {
@@ -32,7 +38,7 @@ const fetchPages = graphql => graphql(`
   }
 `).then(({ data: { allWordpressPage: { nodes } } }) => nodes)
 
-const fetchPosts = graphql => graphql(`
+const fetchAllPosts = graphql => graphql(`
   query {
     allWordpressPost(filter: { status: { eq: "publish" } }) {
       nodes {
@@ -47,7 +53,7 @@ const fetchPosts = graphql => graphql(`
   }
 `).then(({ data: { allWordpressPost: { nodes } } }) => nodes)
 
-const fetchTalks = graphql => graphql(`
+const fetchAllTalks = graphql => graphql(`
   query {
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
       nodes {
@@ -61,9 +67,16 @@ const fetchTalks = graphql => graphql(`
   }
 `).then(({ data: { allWordpressWpTalks: { nodes } } }) => nodes)
 
-module.exports = {
-  fetchOss,
-  fetchPages,
-  fetchPosts,
-  fetchTalks
+const postTypesApi = {
+  fetchAllOss,
+  fetchAllPages,
+  fetchAllPosts,
+  fetchAllTalks,
 }
+
+exports.fetchAllPosts = graphql =>
+  Promise
+    .all(Object.keys(postTypesApi).map(method => postTypesApi[method](graphql)))
+    .then(flattenPosts)
+    .then(buildRelatedPosts)
+    .then(removeUnlinkedPosts)

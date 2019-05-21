@@ -1,0 +1,1 @@
+exports.createPagesForPosts = require('./createPagesForPosts')
