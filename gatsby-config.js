@@ -5,6 +5,10 @@ module.exports = {
     author: `@knicklabs`,
   },
   plugins: [
+    // A Gatsby plugin for styled-components with built-in server-side 
+    // rendering support.
+    `gatsby-plugin-styled-components`,
+
     // This plugin intercepts all local links that have not been created in React 
     // using gatsby-link, and replaces their behavior with that of the gatsby-link 
     // navigate.
