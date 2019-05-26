@@ -164,14 +164,14 @@ export const fontFamily = {
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
     '"Noto Color Emoji"',
-  ],
+  ].join(', '),
   serif: [
     'Georgia',
     'Cambria',
     '"Times New Roman"',
     'Times',
     'serif',
-  ],
+  ].join(', '),
   mono: [
     'Menlo',
     'Monaco',
@@ -179,7 +179,7 @@ export const fontFamily = {
     '"Liberation Mono"',
     '"Courier New"',
     'monospace',
-  ],
+  ].join(', '),
 }
 
 export const fontSize = {
