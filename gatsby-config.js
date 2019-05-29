@@ -43,6 +43,7 @@ module.exports = {
         hostingWPCOM: false,
         useACF: false,
         includedRoutes: [
+          "/*/*/menus",
           "/*/*/posts",
           "/*/*/pages",
           "/*/*/talks",

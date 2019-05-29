@@ -19,12 +19,14 @@ const getPageTemplate = (type = defaultType) => {
  * a page for each one.
  * @param {function} createPage
  * @param {Array}    posts
+ * @param {Object}   siteInfo
  */
-module.exports = (createPage, posts) =>
+module.exports = (createPage, posts, siteInfo) =>
   posts.forEach(post => createPage({
     path: post.path,
     component: getPageTemplate(post.type),
     context: {
       post,
+      siteInfo,
     },
   }))

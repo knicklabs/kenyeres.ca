@@ -89,3 +89,37 @@ exports.fetchAllPosts = graphql =>
     .then(flattenPosts)
     .then(buildRelatedPosts)
     .then(removeUnlinkedPosts)
+
+exports.fetchSiteInfo = graphql => graphql(`
+  query {
+    allWordpressWpApiMenusMenusItems {
+      nodes {
+        description
+        name
+        slug
+        items {
+          classes
+          description
+          order
+          wordpress_id
+          target
+          title
+          url
+        }
+      }
+    }
+    wordpressSiteMetadata {
+      description
+      name
+      url
+      home
+    }
+  }
+`)
+.then(({ data: { allWordpressWpApiMenusMenusItems: { nodes: menus }, wordpressSiteMetadata } } ) => ({
+  ...wordpressSiteMetadata,
+  menus: menus.map(menu => ({
+    ...menu,
+    items: menu.items.sort((a, b) => a.order - b.order),
+  }))
+}))
