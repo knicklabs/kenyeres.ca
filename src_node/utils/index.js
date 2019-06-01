@@ -1,1 +1,1 @@
-exports.createPagesForPosts = require('./createPagesForPosts')
+exports.createPagesForWPContent = require('./createPagesForWPContent')

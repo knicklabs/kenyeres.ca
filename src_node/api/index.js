@@ -1,11 +1,9 @@
 const { 
   buildRelatedPosts, 
-  flattenPosts, 
   removeUnlinkedPosts 
 } = require('./utils')
 
-// Fetch all posts of the `oss` type.
-const fetchAllOss = graphql => graphql(`
+exports.fetchWPContent = graphql => graphql(`
   query {
     allWordpressWpOss(filter: {status: { eq: "publish" } }) {
       nodes {
@@ -16,12 +14,6 @@ const fetchAllOss = graphql => graphql(`
         wordpress_id
       }
     }
-  }
-`).then(({ data: { allWordpressWpOss: { nodes } } }) => nodes)
-
-// Fetch all pages.
-const fetchAllPages = graphql => graphql(`
-  query {
     allWordpressPage(filter: {status: { eq: "publish" } }) {
       nodes {
         acf {
@@ -37,12 +29,6 @@ const fetchAllPages = graphql => graphql(`
         wordpress_id
       }
     }
-  }
-`).then(({ data: { allWordpressPage: { nodes } } }) => nodes)
-
-// Fetch all posts.
-const fetchAllPosts = graphql => graphql(`
-  query {
     allWordpressPost(filter: { status: { eq: "publish" } }) {
       nodes {
         content
@@ -53,12 +39,6 @@ const fetchAllPosts = graphql => graphql(`
         wordpress_id
       }
     }
-  }
-`).then(({ data: { allWordpressPost: { nodes } } }) => nodes)
-
-// Fetch all posts of the `talks` type.
-const fetchAllTalks = graphql => graphql(`
-  query {
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
       nodes {
         path
@@ -68,30 +48,6 @@ const fetchAllTalks = graphql => graphql(`
         wordpress_id
       }
     }
-  }
-`).then(({ data: { allWordpressWpTalks: { nodes } } }) => nodes)
-
-const postTypesApi = {
-  fetchAllOss,
-  fetchAllPages,
-  fetchAllPosts,
-  fetchAllTalks,
-}
-
-/**
- * Fetch all posts of all types.
- * @param  {function} graphql
- * @return {Array}
- */
-exports.fetchAllPosts = graphql =>
-  Promise
-    .all(Object.keys(postTypesApi).map(method => postTypesApi[method](graphql)))
-    .then(flattenPosts)
-    .then(buildRelatedPosts)
-    .then(removeUnlinkedPosts)
-
-exports.fetchSiteInfo = graphql => graphql(`
-  query {
     allWordpressWpApiMenusMenusItems {
       nodes {
         description
@@ -115,11 +71,26 @@ exports.fetchSiteInfo = graphql => graphql(`
       home
     }
   }
-`)
-.then(({ data: { allWordpressWpApiMenusMenusItems: { nodes: menus }, wordpressSiteMetadata } } ) => ({
-  ...wordpressSiteMetadata,
-  menus: menus.map(menu => ({
-    ...menu,
-    items: menu.items.sort((a, b) => a.order - b.order),
-  }))
+`).then(({
+  data: {
+    allWordpressWpOss: { nodes: oss },
+    allWordpressPage: { nodes: pages },
+    allWordpressPost: { nodes: posts },
+    allWordpressWpTalks: { nodes: talks },
+    allWordpressWpApiMenusMenusItems: { nodes: menus },
+    wordpressSiteMetadata: siteInfo,
+  }
+}) => ({
+  options: {
+    ...siteInfo,
+    menus,
+  },
+  posts: removeUnlinkedPosts(
+    buildRelatedPosts([
+      ...oss,
+      ...pages,
+      ...posts,
+      ...talks,
+    ])
+  ),
 }))
