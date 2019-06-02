@@ -9,10 +9,11 @@ export default React.memo(({ children, currentPostType, currentUrl, title, url =
     <NavBar>
       <NavBar.Brand href={url}>{title}</NavBar.Brand>
       <NavBar.Menu>
-        {menuItems.map(({ title, url, ...rest }) => (
+        {menuItems.map(({ title, url, wordpress_id, ...rest }) => (
           <NavBar.MenuItem 
             active={isActive(url, currentUrl, currentPostType)}
             href={url} 
+            key={wordpress_id}
             {...rest}
           >
             {title}

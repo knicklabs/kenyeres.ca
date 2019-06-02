@@ -48,6 +48,7 @@ module.exports = {
           "/*/*/pages",
           "/*/*/talks",
           "/*/*/oss",
+          "**/tags",
         ],
         searchAndReplaceContentUrls: {
           sourceUrl: "https://wp.kenyeres.ca",

@@ -1,5 +1,6 @@
 const { 
-  buildRelatedPosts, 
+  buildRelatedPosts,
+  buildTags,
   removeUnlinkedPosts 
 } = require('./utils')
 
@@ -37,6 +38,11 @@ exports.fetchWPContent = graphql => graphql(`
         date
         path
         slug
+        tags {
+          name
+          slug
+          wordpress_id
+        }
         title
         type
         wordpress_id
@@ -50,6 +56,13 @@ exports.fetchWPContent = graphql => graphql(`
         title
         type
         wordpress_id
+      }
+    }
+    allWordpressTag {
+      nodes {
+        wordpress_id
+        name
+        slug
       }
     }
     allWordpressWpApiMenusMenusItems {
@@ -81,6 +94,7 @@ exports.fetchWPContent = graphql => graphql(`
     allWordpressPage: { nodes: pages },
     allWordpressPost: { nodes: posts },
     allWordpressWpTalks: { nodes: talks },
+    allWordpressTag: { nodes: tags },
     allWordpressWpApiMenusMenusItems: { nodes: menus },
     wordpressSiteMetadata: siteInfo,
   }

@@ -1,4 +1,3 @@
-import { Link } from 'gatsby'
 import Helmet from 'react-helmet'
 import React from 'react'
 
@@ -22,12 +21,7 @@ export default props => {
         <title>{title} | {name}</title>
         <meta name="description" content={description} />
       </Helmet>
-      <Page content={content} date={date} title={title} type={type} />
-      {acf.posts.map(p => (
-        <div>
-          {p.path ? <Link to={p.path}>{p.title}</Link> : p.title}
-        </div>
-      ))}
+      <Page content={content} date={date} posts={acf.posts} title={title} type={type} />
     </DefaultLayout>
   )
 }
