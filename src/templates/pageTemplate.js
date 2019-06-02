@@ -9,7 +9,7 @@ import Page from '../components/Page'
 export default props => {
   const { location: { href: currentUrl }, pageContext: { post, options } } = props
   const { description, menus, name, url } = options
-  const { acf = { posts: [] }, content, title, type } = post
+  const { acf = { posts: [] }, content, date, title, type } = post
 
   return (
     <DefaultLayout 
@@ -22,7 +22,7 @@ export default props => {
         <title>{title} | {name}</title>
         <meta name="description" content={description} />
       </Helmet>
-      <Page content={content} title={title} />
+      <Page content={content} date={date} title={title} type={type} />
       {acf.posts.map(p => (
         <div>
           {p.path ? <Link to={p.path}>{p.title}</Link> : p.title}

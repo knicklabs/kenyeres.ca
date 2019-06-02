@@ -7,6 +7,7 @@ import {
   fontSize,
   fontWeight,
   lineHeight,
+  margin,
   maxWidth, 
   padding,
 } from '../../theme'
@@ -71,6 +72,14 @@ export const BodyUI = styled.div`
       padding: 0;
     }
   }
+`
+
+export const DateUI = styled.div`
+  color: ${colors.blue['700']};
+  font-family: ${fontFamily.sans};
+  font-size: ${fontSize.sm};
+  font-weight: ${fontWeight.light};
+  margin-top: ${margin['2']};
 `
 
 export const HeaderUI = styled.header`

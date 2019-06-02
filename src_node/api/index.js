@@ -7,6 +7,7 @@ exports.fetchWPContent = graphql => graphql(`
   query {
     allWordpressWpOss(filter: {status: { eq: "publish" } }) {
       nodes {
+        date
         path
         slug
         title
@@ -22,6 +23,7 @@ exports.fetchWPContent = graphql => graphql(`
           }
         }
         content
+        date
         path
         slug
         type
@@ -32,6 +34,7 @@ exports.fetchWPContent = graphql => graphql(`
     allWordpressPost(filter: { status: { eq: "publish" } }) {
       nodes {
         content
+        date
         path
         slug
         title
@@ -41,6 +44,7 @@ exports.fetchWPContent = graphql => graphql(`
     }
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
       nodes {
+        date
         path
         slug
         title
