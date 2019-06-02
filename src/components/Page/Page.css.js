@@ -22,7 +22,7 @@ export const ArticleUI = styled.article`
   max-width: ${maxWidth['6xl']};
 `
 
-export const BodyUI = styled.body`
+export const BodyUI = styled.div`
   color: ${colors.gray['800']};
   font-family: ${fontFamily.sans};
   font-size: ${fontSize.base};
