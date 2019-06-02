@@ -9,12 +9,12 @@ import {
   padding,
 } from '../../theme'
 
-export const NavUI = styled.nav`
+export const NavUI = styled.header`
   background: ${colors.indigo['800']};
   padding: ${padding[6]};
   text-align: center;
 
-  > div {
+  > nav {
     align-items: center;
     display: flex;
     justify-content: space-between;

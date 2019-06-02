@@ -3,9 +3,9 @@ import { BrandUI, MenuUI, MenuItemUI, NavUI } from './NavBar.css'
 
 const NavBar = React.memo(({ children }) => (
   <NavUI>
-    <div>
+    <nav>
       {children}
-    </div>
+    </nav>
   </NavUI>
 ))
 
