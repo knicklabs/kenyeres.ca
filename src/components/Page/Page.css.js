@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import { 
   borderRadius,
+  boxShadow,
   colors, 
   fontFamily,
   fontSize,
@@ -61,6 +62,7 @@ export const BodyUI = styled.div`
   pre {
     background-color: ${colors.gray['300']};
     border-radius: ${borderRadius.default};
+    box-shadow: ${boxShadow.md};
     padding: ${padding['3']};
 
     code {

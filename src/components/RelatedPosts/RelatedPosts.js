@@ -1,19 +1,17 @@
 import { Link } from 'gatsby'
 import React from 'react'
 
-import { CardUI, RelatedPostsUI, RelatedPostUI } from './RelatedPosts.css'
+import { CardUI, CardLinkUI, RelatedPostsUI, RelatedPostUI } from './RelatedPosts.css'
 import { TYPES } from '../../constants'
 
 const renderItem = post => post.title
 
 const renderPost = post => (
-  <Link to={post.path}>
-    <CardUI>
-      <Link to={post.path}>
-        {post.title}
-      </Link>
-    </CardUI>
-  </Link>
+  <CardUI>
+    <CardLinkUI to={post.path}>
+      {post.title}
+    </CardLinkUI>
+  </CardUI>
 )
 
 const renderRelatedPost = post => {
@@ -30,7 +28,6 @@ const renderRelatedPost = post => {
 }
 
 export default React.memo(({posts = []}) => {
-  console.log(posts)
   if (!posts.length) {
     return null
   }
