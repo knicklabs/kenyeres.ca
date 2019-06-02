@@ -7,7 +7,6 @@ import {
   fontSize,
   fontWeight,
   lineHeight,
-  margin,
   maxWidth, 
   padding,
 } from '../../theme'
@@ -52,6 +51,7 @@ export const BodyUI = styled.div`
 
   code {
     background-color: ${colors.gray['300']};
+    border-radius: ${borderRadius.default};
     color: ${colors.gray['600']};
     display: inline-block;
     padding: 0 ${padding['2']};
@@ -64,6 +64,7 @@ export const BodyUI = styled.div`
 
     code {
       background-color: transparent;
+      border-radius: none;
       color: ${colors.gray['600']};
       font-family: ${fontFamily.mono};
       font-size: ${fontSize.xs};
