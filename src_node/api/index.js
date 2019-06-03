@@ -1,6 +1,6 @@
+const { GatsbyImageSharpFixed } = require('gatsby-image')
 const { 
   buildRelatedPosts,
-  buildTags,
   removeUnlinkedPosts 
 } = require('./utils')
 
@@ -39,6 +39,21 @@ exports.fetchWPContent = graphql => graphql(`
         type
         title
         wordpress_id
+        featured_media {
+          alt_text
+          source_url
+          localFile {
+            childImageSharp {
+              fixed(width: 500, height: 500) {
+                tracedSVG
+                width
+                height
+                src
+                srcSet
+              }
+            }
+          }
+        }
       }
     }
     allWordpressPost(filter: { status: { eq: "publish" } }) {

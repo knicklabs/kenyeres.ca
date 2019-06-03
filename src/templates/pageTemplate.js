@@ -8,7 +8,7 @@ import Page from '../components/Page'
 export default props => {
   const { location: { href: currentUrl }, pageContext: { post, options } } = props
   const { description, menus, name, url } = options
-  const { acf = { posts: [] }, content, date, title, type } = post
+  const { acf = { posts: [] }, content, date, featured_media, title, type } = post
 
   return (
     <DefaultLayout 
@@ -21,7 +21,14 @@ export default props => {
         <title>{title} | {name}</title>
         <meta name="description" content={description} />
       </Helmet>
-      <Page content={content} date={date} posts={acf.posts} title={title} type={type} />
+      <Page 
+        content={content} 
+        date={date} 
+        featured_media={featured_media} 
+        posts={acf.posts} 
+        title={title} 
+        type={type} 
+      />
     </DefaultLayout>
   )
 }

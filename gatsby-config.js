@@ -56,6 +56,7 @@ module.exports = {
           "/*/*/pages",
           "/*/*/talks",
           "/*/*/oss",
+          "**/media",
           "**/tags",
         ],
         searchAndReplaceContentUrls: {

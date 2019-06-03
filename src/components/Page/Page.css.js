@@ -91,6 +91,21 @@ export const HeaderUI = styled.header`
   text-align: left;
 `
 
+export const ImageUI = styled.div`
+  background-color: ${colors.white};
+  border: 0.75rem solid ${colors.white};
+  border-radius: ${borderRadius.default};
+  box-shadow: ${boxShadow.md};
+  display: inline-block;
+  vertical-align: middle;
+`
+
+export const ImageWrapperUI = styled.div`
+  margin-left: ${margin['5']};
+  margin-top: ${margin['4']};
+  text-align: right;
+`
+
 export const TitleUI = styled.h1`
   color: ${colors.blue['800']};
   font-family: ${fontFamily.sans};
@@ -98,4 +113,12 @@ export const TitleUI = styled.h1`
   font-weight: ${fontWeight.medium};
   line-height: ${lineHeight.snug};
   margin: 0;
+`
+
+export const WrapperUI = styled.div`
+  display: flex;
+
+  > div {
+    width: 100%;
+  }
 `
