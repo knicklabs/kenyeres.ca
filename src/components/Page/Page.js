@@ -34,7 +34,7 @@ export default React.memo(({ content, date, featured_media, posts = [], title, t
         {featured_media && (
           <ImageWrapperUI>
             <ImageUI>
-              <Img fixed={featured_media.localFile.childImageSharp.fixed} />
+              <Img alt={featured_media.alt_text} fixed={featured_media.localFile.childImageSharp.fixed} />
             </ImageUI>
           </ImageWrapperUI>
         )}
