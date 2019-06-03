@@ -1,6 +1,6 @@
 const path = require('path')
 
-const component = path.resolve('src/templates/PageTemplate.js')
+const component = path.resolve('src/templates/pageTemplate.js')
 
 /**
  * Iterate over an array of posts and create

@@ -14,6 +14,15 @@ exports.fetchWPContent = graphql => graphql(`
         title
         type
         wordpress_id
+        acf {
+          lanuage
+          supported
+          repository
+          repository_url
+          package_manager
+          package_url
+          description
+        }
       }
     }
     allWordpressPage(filter: {status: { eq: "publish" } }) {

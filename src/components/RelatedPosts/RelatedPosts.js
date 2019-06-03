@@ -32,8 +32,10 @@ const reformatDate = date => {
 const linkIcon = type => {
   switch (type) {
     case 'code':
+    case 'repo':
       return <CodeIcon />
     case 'event':
+    case 'package':
       return <LinkIcon />
     case 'slides':
       return <SlidesIcon />
@@ -59,7 +61,7 @@ const linkText = type => {
   }
 }
 
-const renderLink = (link, type) => {
+const renderLink = (link, type, text) => {
   if (!link) {
     return null
   }
@@ -68,7 +70,7 @@ const renderLink = (link, type) => {
     <CardMetaItemUI>
       <CardDetailUI>
         {linkIcon(type)}
-        <a href={link}>{linkText(type)}</a>
+        <a href={link}>{text || linkText(type)}</a>
       </CardDetailUI>
     </CardMetaItemUI>
   )
@@ -105,9 +107,26 @@ const renderTalk = post => (
   </CardUI>
 )
 
+const renderOSS = post => (
+  <CardUI>
+    <CardTitleUI>{post.title}</CardTitleUI>
+    <CardMetaItemUI>
+      <CardDetailUI>{post.acf.lanuage}</CardDetailUI>
+    </CardMetaItemUI>
+    <CardDescriptionUI dangerouslySetInnerHTML={{__html: post.acf.description}} />
+    <div>
+      {renderLink(post.acf.repository_url, 'repo', `View source on ${post.acf.repository}`)}
+      {renderLink(post.acf.package_url, 'package', `Install on ${post.acf.package_manager}`)}
+    </div>
+  </CardUI>
+)
+
 const renderRelatedPost = post => {
   let result
   switch (post.type) {
+    case TYPES.OSS:
+      result = renderOSS(post)
+      break
     case TYPES.POST:
       result = renderPost(post)
       break
