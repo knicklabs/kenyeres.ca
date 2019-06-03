@@ -10,7 +10,7 @@ export const getMenuItemsBySlug = (menus, slug) => {
   return menu ? menu.items : []
 }
 
-export const isActive = (href, currentUrl, currentPostType) => {
+export const isActive = (href, currentUrl = '', currentPostType) => {
   const trimmedHref = href.replace(/\/$/, '')
   const trimmedCurrentUrl = currentUrl.replace(/\/$/, '')
 
