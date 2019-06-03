@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { 
+import {
+  boxShadow,
   colors, 
   fontFamily, 
   fontSize, 
@@ -11,6 +12,7 @@ import {
 
 export const NavUI = styled.header`
   background: ${colors.indigo['800']};
+  box-shadow: ${boxShadow.sm};
   padding: ${padding[6]};
   text-align: center;
 

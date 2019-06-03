@@ -86,6 +86,7 @@ export const DateUI = styled.div`
 
 export const HeaderUI = styled.header`
   border-bottom: 1px solid ${colors.gray['300']};
+  box-shadow: 0 1px 0 ${colors.gray['100']};
   padding-bottom: ${padding[3]};
   text-align: left;
 `
