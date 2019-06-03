@@ -56,6 +56,15 @@ exports.fetchWPContent = graphql => graphql(`
         title
         type
         wordpress_id
+        acf {
+          date
+          location
+          description
+          video_url
+          event_url
+          slides_url
+          sample_code_url
+        }
       }
     }
     allWordpressTag {
