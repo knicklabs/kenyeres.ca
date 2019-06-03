@@ -21,6 +21,14 @@ module.exports = {
     // See: https://www.gatsbyjs.org/packages/gatsby-plugin-react-helmet/
     `gatsby-plugin-react-helmet`,
 
+    // Sets the lang attribute on the HTML tag
+    {
+      resolve: 'gatsby-plugin-html-attributes',
+      options: {
+        lang: 'en'
+      }
+    },
+
     // Source plugin for sourcing data into your Gatsby application from your 
     // local filesystem.
     // See: https://www.gatsbyjs.org/packages/gatsby-source-filesystem/
