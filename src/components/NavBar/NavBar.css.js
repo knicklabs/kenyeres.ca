@@ -27,7 +27,6 @@ export const NavUI = styled.header`
 
 export const BrandUI = styled.a`
   color: ${colors.white};
-  cursor: default;
   display: inline-block;
   font-family: ${fontFamily.sans};
   font-size: ${fontSize.lg};
