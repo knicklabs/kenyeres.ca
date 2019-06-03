@@ -44,7 +44,7 @@ exports.fetchWPContent = graphql => graphql(`
           source_url
           localFile {
             childImageSharp {
-              fixed(width: 500, height: 500) {
+              fixed(width: 400, height: 400) {
                 tracedSVG
                 width
                 height

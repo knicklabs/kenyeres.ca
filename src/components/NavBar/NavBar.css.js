@@ -60,7 +60,7 @@ export const MenuItemUI = styled.li`
     transition: color 150ms ease-in;
 
     &:hover {
-      color: ${props => props.active ? colors.green['100'] : colors.indigo['100']};
+      color: ${props => props.active ? colors.green['200'] : colors.indigo['100']};
     }
   }
 `

@@ -74,6 +74,11 @@ export const BodyUI = styled.div`
       padding: 0;
     }
   }
+
+  hr {
+    border-top: 1px solid ${colors.gray['300']};
+    box-shadow: 0 1px 0 ${colors.gray['100']};
+  }
 `
 
 export const DateUI = styled.div`
@@ -120,5 +125,9 @@ export const WrapperUI = styled.div`
 
   > div {
     width: 100%;
+  }
+
+  > div + div {
+    width: auto;
   }
 `
