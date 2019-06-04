@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {
+  borderRadius,
   boxShadow,
   colors, 
   fontFamily, 
@@ -95,7 +96,12 @@ export const MenuItemUI = styled.li`
 `
 
 export const ToggleButtonUI = styled.button`
+  background-color: transparent;
+  border: ${props => props.isOpen ? `1px solid ${colors.indigo['200']}` : `1px solid ${colors.white}`};
+  border-radius: ${borderRadius.default};
+  color: ${props => props.isOpen ? colors.indigo['200'] : colors.white};
   display: none;
+  padding: ${padding['1']} ${padding['2']};
 
   @media screen and (max-width: ${maxWidth.xl}) {
     display: inline-block;
