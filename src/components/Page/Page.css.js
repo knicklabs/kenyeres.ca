@@ -72,11 +72,13 @@ export const BodyUI = styled.div`
       font-family: ${fontFamily.mono};
       font-size: ${fontSize.xs};
       padding: 0;
+      width: 100%;
+      overflow-x: auto;
     }
   }
 
   hr {
-    border-top: 1px solid ${colors.gray['300']};
+    border: 1px solid ${colors.gray['300']};
     box-shadow: 0 1px 0 ${colors.gray['100']};
   }
 `
