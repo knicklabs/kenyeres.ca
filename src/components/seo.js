@@ -72,6 +72,6 @@ export default React.memo(({
         name: 'twitter:image',
         content: getSrc(twitterImage),
       }
-    ].concat(meta)}
+    ].concat(meta).filter(({ content }) => !!content)}
   />
 ))
