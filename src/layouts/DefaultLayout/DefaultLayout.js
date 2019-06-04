@@ -8,6 +8,7 @@ export default React.memo(({ children, currentPostType, currentUrl, title, url =
   <DefaultLayoutUI>
     <NavBar>
       <NavBar.Brand href={url}>{title}</NavBar.Brand>
+      <NavBar.ToggleButton>Menu</NavBar.ToggleButton>
       <NavBar.Menu>
         {menuItems.map(({ title, url, wordpress_id, ...rest }) => (
           <NavBar.MenuItem 

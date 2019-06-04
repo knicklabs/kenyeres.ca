@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrandUI, MenuUI, MenuItemUI, NavUI } from './NavBar.css'
+import { BrandUI, MenuUI, MenuItemUI, NavUI,  ToggleButtonUI } from './NavBar.css'
 
 const NavBar = React.memo(({ children }) => (
   <NavUI>
@@ -29,5 +29,28 @@ NavBar.MenuItem = React.memo(({
     </a>
   </MenuItemUI>
 ))
+
+class ToggleButton extends React.Component {
+  state = {
+    isOpen: false,
+  }
+
+  toggle = (e) => {
+    e && e.preventDefault()
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
+  render() {
+    const { children } = this.props
+    const { isOpen } = this.state
+    return (
+      <ToggleButtonUI onClick={this.toggle} isOpen={isOpen}>
+        {children}
+      </ToggleButtonUI>
+    )
+  }
+}
+
+NavBar.ToggleButton = ToggleButton
 
 export default NavBar

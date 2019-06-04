@@ -19,16 +19,11 @@ export const NavUI = styled.header`
   > nav {
     align-items: center;
     display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
     margin: 0 auto;
     max-width: ${maxWidth['6xl']};
     position: relative;
-
-    @media screen and (max-width: ${maxWidth.lg}) {
-      text-align: left;
-      justify-content: flex-start;
-      padding-left: 50px;
-    }
   }
 `
 
@@ -39,12 +34,6 @@ export const BrandUI = styled.a`
   font-size: ${fontSize.lg};
   font-weight: ${fontWeight.medium};
   text-decoration: none;
-
-  @media screen and (max-width: ${maxWidth.lg}) {
-    position: absolute;
-    left: -60px;
-    transform: rotate(-90deg);
-  }
 `
 
 export const MenuUI = styled.ul`
@@ -52,8 +41,8 @@ export const MenuUI = styled.ul`
   margin: 0;
   padding: 0;
 
-  @media screen and (max-width: ${maxWidth.lg}) {
-    display: block;
+  @media screen and (max-width: ${maxWidth.xl}) {
+    width: 100%;
   }
 `
 
@@ -81,14 +70,14 @@ export const MenuItemUI = styled.li`
     }
   }
 
-  @media screen and (max-width: ${maxWidth.lg}) {
+  @media screen and (max-width: ${maxWidth.xl}) {
     display: block;
     margin-right: 0;
     text-align: left;
 
     &:first-child {
       a {
-        padding-top: 0;
+        padding-top: ${padding['5']};
       }
     }
 
@@ -101,6 +90,18 @@ export const MenuItemUI = styled.li`
     a {
       display: block;
       padding: ${padding['2']} 0;
+    }
+  }
+`
+
+export const ToggleButtonUI = styled.button`
+  display: none;
+
+  @media screen and (max-width: ${maxWidth.xl}) {
+    display: inline-block;
+
+    & + ul {
+      display: ${props => props.isOpen ? 'block' : 'none'};
     }
   }
 `
