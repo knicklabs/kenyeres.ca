@@ -40,7 +40,7 @@ export default React.memo(({
       },
       {
         name: 'og:image',
-        content: (facebookImage && typeof facebookImage === 'string') ? facebookImage : facebookImage.source_url,
+        content: (!!facebookImage && typeof facebookImage === 'string') ? facebookImage : facebookImage.source_url,
       },
       {
         name: 'og:type',
@@ -60,7 +60,7 @@ export default React.memo(({
       },
       {
         name: 'twitter:image',
-        content: (twitterImage && typeof twitterImage === 'string') ? twitterImage : twitterImage.source_url,
+        content: (!!twitterImage && typeof twitterImage === 'string') ? twitterImage : twitterImage.source_url,
       }
     ].concat(meta)}
   />
