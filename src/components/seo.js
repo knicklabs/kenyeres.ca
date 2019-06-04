@@ -1,88 +1,67 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
+export default React.memo(({
+  lang = 'en',
+  yoast_wpseo_title: title,
+  yoast_wpseo_metadesc: metaDescription,
+  yoast_wpseo_canonical: canonical,
+  yoast_wpseo_twitter_title: twitterTitle,
+  yoast_wpseo_twitter_description: twitterDescription,
+  yoast_wpseo_twitter_image: twitterImage,
+  twitterType = 'summary',
+  yoast_wpseo_facebook_title: facebookTitle,
+  yoast_wpseo_facebook_description: facebookDescription,
+  yoast_wpseo_facebook_image: facebookImage,
+  facebookType = 'website',
+  meta = [],
+}) => (
+  <Helmet
+    htmlAttributes={{
+      lang,
+    }}
+    title={title}
+    meta={[
+      {
+        name: 'canonical',
+        content: canonical,
+      },
+      {
+        name: 'description',
+        content: metaDescription,
+      },
+      {
+        name: 'og:title',
+        content: facebookTitle,
+      },
+      {
+        name: 'og:description',
+        content: facebookDescription,
+      },
+      {
+        name: 'og:image',
+        content: typeof facebookImage === 'object' ? facebookImage.source_url : facebookImage,
+      },
+      {
+        name: 'og:type',
+        content: facebookType,
+      },
+      {
+        name: 'twitter:card',
+        content: twitterType,
+      },
+      {
+        name: 'twitter:title',
+        content: twitterTitle,
+      },
+      {
+        name: 'twitter:description',
+        content: twitterDescription,
+      },
+      {
+        name: 'twitter:image',
+        content: typeof twitterImage === 'object' ? twitterImage.source_url : twitterImage
       }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-
-  return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
-  )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-}
-
-export default SEO
+    ].concat(meta)}
+  />
+))

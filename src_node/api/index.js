@@ -39,6 +39,21 @@ exports.fetchWPContent = graphql => graphql(`
         type
         title
         wordpress_id
+        yoast_meta {
+          yoast_wpseo_title
+          yoast_wpseo_metadesc
+          yoast_wpseo_canonical
+          yoast_wpseo_twitter_title
+          yoast_wpseo_twitter_description
+          yoast_wpseo_twitter_image {
+            source_url
+          }
+          yoast_wpseo_facebook_title
+          yoast_wpseo_facebook_description
+          yoast_wpseo_facebook_image {
+            source_url
+          }
+        }
         featured_media {
           alt_text
           source_url
@@ -70,6 +85,17 @@ exports.fetchWPContent = graphql => graphql(`
         title
         type
         wordpress_id
+        yoast_meta {
+          yoast_wpseo_title
+          yoast_wpseo_metadesc
+          yoast_wpseo_canonical
+          yoast_wpseo_twitter_title
+          yoast_wpseo_twitter_description
+          yoast_wpseo_twitter_image
+          yoast_wpseo_facebook_title
+          yoast_wpseo_facebook_description
+          yoast_wpseo_facebook_image
+        }
       }
     }
     allWordpressWpTalks(filter: {status: { eq: "publish" } }) {
