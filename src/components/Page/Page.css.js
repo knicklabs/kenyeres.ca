@@ -103,14 +103,42 @@ export const ImageUI = styled.div`
   border: 0.75rem solid ${colors.white};
   border-radius: ${borderRadius.default};
   box-shadow: ${boxShadow.md};
+  box-sizing: border-box;
   display: inline-block;
+  position: relative;
   vertical-align: middle;
+
+  @media screen and (max-width: ${maxWidth.lg}) {
+    border: 0;
+    box-shadow: none;
+    width: 100%;
+
+    img {
+      display: none;
+    }
+
+    .gatsby-image-wrapper {
+      width: 100% !important;
+    }
+
+    picture img {
+      position: static;
+      display: block;
+      width: 100%;
+    }
+  }
 `
 
 export const ImageWrapperUI = styled.div`
   margin-left: ${margin['5']};
   margin-top: ${margin['4']};
   text-align: right;
+
+  @media screen and (max-width: ${maxWidth.lg}) {
+    margin: 0;
+    max-width: 100%;
+    text-align: left;
+  }
 `
 
 export const TitleUI = styled.h1`
@@ -124,6 +152,10 @@ export const TitleUI = styled.h1`
 
 export const WrapperUI = styled.div`
   display: flex;
+
+  @media screen and (max-width: ${maxWidth.lg}) {
+    display: block;
+  }
 
   > div {
     width: 100%;
