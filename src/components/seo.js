@@ -1,6 +1,16 @@
 import React from "react"
 import Helmet from "react-helmet"
 
+const getSrc = image => {
+  if (!image) {
+    return ''
+  }
+  if (typeof image === 'string') {
+    return image
+  }
+  return image.source_url
+}
+
 export default React.memo(({
   lang = 'en',
   yoast_wpseo_title: title,
@@ -40,7 +50,7 @@ export default React.memo(({
       },
       {
         name: 'og:image',
-        content: (!!facebookImage && typeof facebookImage === 'string') ? facebookImage : facebookImage.source_url,
+        content: getSrc(facebookImage),
       },
       {
         name: 'og:type',
@@ -60,7 +70,7 @@ export default React.memo(({
       },
       {
         name: 'twitter:image',
-        content: (!!twitterImage && typeof twitterImage === 'string') ? twitterImage : twitterImage.source_url,
+        content: getSrc(twitterImage),
       }
     ].concat(meta)}
   />
