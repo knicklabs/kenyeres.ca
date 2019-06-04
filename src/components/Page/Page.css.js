@@ -108,16 +108,28 @@ export const ImageUI = styled.div`
   position: relative;
   vertical-align: middle;
 
-  @media screen and (max-width: ${maxWidth.lg}) {
+  @media screen and (max-width: ${maxWidth['4xl']}) {
+    .gatsby-image-wrapper {
+      height: 300px !important;
+      width: 300px !important;
+    }
+  }
+
+  @media screen and (max-width: ${maxWidth['3xl']}) {
+    .gatsby-image-wrapper {
+      height: 200px !important;
+      width: 200px !important;
+    }
+  }
+
+  @media screen and (max-width: ${maxWidth['2xl']}) {
     border: 0;
     box-shadow: none;
     width: 100%;
 
-    img {
-      display: none;
-    }
-
     .gatsby-image-wrapper {
+      height: auto !important;
+      min-height: 400px;
       width: 100% !important;
     }
 
@@ -134,7 +146,7 @@ export const ImageWrapperUI = styled.div`
   margin-top: ${margin['4']};
   text-align: right;
 
-  @media screen and (max-width: ${maxWidth.lg}) {
+  @media screen and (max-width: ${maxWidth['2xl']}) {
     margin: 0;
     max-width: 100%;
     text-align: left;
@@ -153,7 +165,7 @@ export const TitleUI = styled.h1`
 export const WrapperUI = styled.div`
   display: flex;
 
-  @media screen and (max-width: ${maxWidth.lg}) {
+  @media screen and (max-width: ${maxWidth['2xl']}) {
     display: block;
   }
 
